@@ -1,3 +1,5 @@
+import { RingBuffer } from "./buffer.js";
+
 function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -39,6 +41,11 @@ function generateHoleyDoubleArray(length) {
 function generateHoleyArray(length) {
   const array = new Array(length - 1).fill(randomDouble());
   array.push("");
+  return array;
+}
+
+function generateRingBuffer(length) {
+  const array = new RingBuffer(length);
   return array;
 }
 
@@ -120,6 +127,7 @@ function runTests(length) {
     "HOLEY_ELEMENTS",
     randomDouble,
   );
+  testArrayOperations(generateRingBuffer(length), "RING_BUFFER", randomDouble);
 }
 
 runTests(100);
